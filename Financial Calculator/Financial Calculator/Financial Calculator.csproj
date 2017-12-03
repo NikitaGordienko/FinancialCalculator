@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Formulas.cs" />
+    <Compile Include="Rent.cs" />
     <Compile Include="RentPage.xaml.cs">
       <DependentUpon>RentPage.xaml</DependentUpon>
     </Compile>
