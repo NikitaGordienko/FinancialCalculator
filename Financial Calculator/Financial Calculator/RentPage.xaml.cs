@@ -104,7 +104,7 @@ namespace Financial_Calculator
             }
 
 
-            Rent ourRent = new Rent(R, I, N, P, M, A, S, annuity);
+            Rent ourRent = new Rent(R, I, N, P, M, A, S, annuity,1);
             if (count_1 < 4)
                 MessageBox.Show("Введенных параметров не хватает для расчета параметров ренты!");
             else if (count_1==4)

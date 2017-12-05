@@ -16,8 +16,9 @@ namespace Financial_Calculator
         public double A; // Современная стоимость
         public double S; // Наращенная стоимость
         public bool flag; // true - постнумерандо, false - пренумерандо
+        public int type; // Тип ренты: 1 - обычная, 2 - вечная, 3 - непрерывная
 
-        public Rent(double R, double i, double n, double p, double m, double A, double S, bool flag)
+        public Rent(double R, double i, double n, double p, double m, double A, double S, bool flag, int type)
         {
             this.R = R;
             this.i = i;
@@ -27,6 +28,7 @@ namespace Financial_Calculator
             this.A = A;
             this.S = S;
             this.flag = flag;
+            this.type = type;
         }
 
         public void CalculateRentCosts() 
@@ -53,64 +55,96 @@ namespace Financial_Calculator
 
         public void FindAccuredCost()
         {
-            if (flag == true)
-                S = R / p * ((Math.Pow(1 + i / m, m * n) - 1) / (Math.Pow(1 + i / m, m / p) - 1));
-            else
-                S = (R / p * ((Math.Pow(1 + i / m, m * n) - 1) / (Math.Pow(1 + i / m, m / p) - 1))) * Math.Pow(1 + i / m, m / p);
+            if (type == 1)
+                if (flag == true)
+                    S = R / p * ((Math.Pow(1 + i / m, m * n) - 1) / (Math.Pow(1 + i / m, m / p) - 1));
+                else
+                    S = (R / p * ((Math.Pow(1 + i / m, m * n) - 1) / (Math.Pow(1 + i / m, m / p) - 1))) * Math.Pow(1 + i / m, m / p);
+            if (type == 2) // Либо использовать бесконечность, либо отключить
+                if (flag == true)
+                    S = double.PositiveInfinity;
+                else
+                    S = double.PositiveInfinity;
         }
 
         public void FindCurrentCost()
         {
-            if (flag==true)
-                A = R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1));
-            else
-                A = (R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1))) * Math.Pow(1 + i / m, m / p);
+            if (type == 1)
+                if (flag==true)
+                    A = R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1));
+                else
+                    A = (R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1))) * Math.Pow(1 + i / m, m / p);
+            if (type == 2)
+                if (flag == true)
+                    A = R / (Math.Pow(1 + i / m, m) - 1);
+                else
+                    A = (R * Math.Pow(1 + i / m, m)) / (Math.Pow(1 + i / m, m) - 1);
         }
 
         public void FindRentPayment()
         {
-            if (flag == true)
-            {
-                if (S == 0)
-                    R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+            if (type == 1)
+            {   // Хочу сделать это только с помощью S (Следовательно нужно переработать CalculateRentCosts())
+                if (flag == true)
+                {
+                    if (S == 0)
+                        R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                    else
+                        R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / (1 - Math.Pow(1 + i / m, -m * n));
+                }
                 else
-                    R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / (1 - Math.Pow(1 + i / m, -m * n));
+                {
+                    if (S == 0)
+                        R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                    else
+                        R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / ((Math.Pow(1 + i / m, m * n) - 1) * Math.Pow(1 + i / m, m / p));
+                }
             }
-            else
+            if (type == 2)
             {
-                if (S == 0)
-                    R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                if (flag == true)
+                    R = A * (Math.Pow(1 + i / m, m) - 1);
                 else
-                    R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / ((Math.Pow(1 + i / m, m * n) - 1) * Math.Pow(1 + i / m, m / p));
+                    R = (A * (Math.Pow(1 + i / m, m) - 1)) / Math.Pow(1 + i / m, m);
             }
         }
 
         public void FindRentDuration()
         {
-            if (flag == true)
+            if (type == 1)
             {
-                if (S == 0)
-                    n = Math.Log((S * Math.Pow(1 + i / m, -m * n) * p * (Math.Pow(1 + i / m, m / p) - 1) / R) + 1) / (m * Math.Log(1 + i / m)); 
+                if (flag == true)
+                {
+                    if (S == 0)
+                        n = Math.Log((A * Math.Pow(1 + i / m, -m * n) * p * (Math.Pow(1 + i / m, m / p) - 1) / R) + 1) / (m * Math.Log(1 + i / m));
+                    else
+                        n = Math.Log((S * p * (Math.Pow(1 + i / m, m / p) - 1) / R) + 1) / (m * Math.Log(1 + i / m));
+                }
                 else
-                    n = Math.Log((S * p * (Math.Pow(1 + i / m, m / p) - 1) / R) + 1) / (m * Math.Log(1 + i / m));
+                {
+                    if (S == 0)
+                        n = Math.Log((A * Math.Pow(1 + i / m, -m * n) * p * (Math.Pow(1 + i / m, m / p) - 1) / (R * Math.Pow(1 + i / m, m / p))) + 1) / (m * Math.Log(1 + i / m));
+                    else
+                        n = Math.Log((S * p * (Math.Pow(1 + i / m, m / p) - 1) / (R * Math.Pow(1 + i / m, m / p))) + 1) / (m * Math.Log(1 + i / m));
+                }
             }
-            else
+            if (type == 2)
             {
-                if (S == 0)
-                    n = Math.Log((S * Math.Pow(1 + i / m, -m * n) * p * (Math.Pow(1 + i / m, m / p) - 1) / (R * Math.Pow(1 + i / m, m / p))) + 1) / (m * Math.Log(1 + i / m));
-                else
-                    n = Math.Log((S * p * (Math.Pow(1 + i / m, m / p) - 1) / (R * Math.Pow(1 + i / m, m / p))) + 1) / (m * Math.Log(1 + i / m));
-            }        
+                n = double.PositiveInfinity;
+            }       
         }
 
         public void FindInterestRate()
         {
-            double i_1 = (-n * (n - 1) / 2 + Math.Sqrt(Math.Pow(-n * (n - 1) / 2, 2) - 4 * (n * (n - 1) * (n - 2)) / 6 * (n - S / R))) / (2 * (n * (n - 1) * (n - 2)) / 6); 
-            double i_2 = (-n * (n - 1) / 2 - Math.Sqrt(Math.Pow(-n * (n - 1) / 2, 2) - 4 * (n * (n - 1) * (n - 2)) / 6 * (n - S / R))) / (2 * (n * (n - 1) * (n - 2)) / 6);
-            if (i_1 > 0)
-                i = i_1;
-            else
-                i = i_2;
+            if (type == 1)
+            {
+                double i_1 = (-n * (n - 1) / 2 + Math.Sqrt(Math.Pow(-n * (n - 1) / 2, 2) - 4 * (n * (n - 1) * (n - 2)) / 6 * (n - S / R))) / (2 * (n * (n - 1) * (n - 2)) / 6);
+                double i_2 = (-n * (n - 1) / 2 - Math.Sqrt(Math.Pow(-n * (n - 1) / 2, 2) - 4 * (n * (n - 1) * (n - 2)) / 6 * (n - S / R))) / (2 * (n * (n - 1) * (n - 2)) / 6);
+                if (i_1 > 0)
+                    i = i_1;
+                else
+                    i = i_2;
+            }
         }
     }
 }
