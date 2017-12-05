@@ -31,3 +31,20 @@ D:\GitHub\Projects\FinancialCalculator\Financial Calculator\Financial Calculator
 D:\GitHub\Projects\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.g.resources
 D:\GitHub\Projects\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial_Calculator.Properties.Resources.resources
 D:\GitHub\Projects\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.csproj.GenerateResource.Cache
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\bin\Debug\Financial Calculator.exe.config
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\bin\Debug\Financial Calculator.exe
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\bin\Debug\Financial Calculator.pdb
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.csprojResolveAssemblyReference.cache
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\MainWindow.g.cs
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\RentPage.g.cs
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\App.g.cs
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator_MarkupCompile.cache
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator_MarkupCompile.lref
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\MainWindow.baml
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\RentPage.baml
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.g.resources
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial_Calculator.Properties.Resources.resources
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.csproj.GenerateResource.Cache
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.csproj.CoreCompileInputs.cache
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.exe
+C:\Users\Nekit\Documents\GitHub\FinancialCalculator\Financial Calculator\Financial Calculator\obj\Debug\Financial Calculator.pdb

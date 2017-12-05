@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Financial_Calculator"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Рассчет рент" Height="600" Width="800">
+        Title="Рассчет рент" Height="600" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Button x:Name="btnCalculate" Content="Рассчитать" Margin="449,471,163,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="18" Height="40" Background="#FF007ACC" Foreground="White" BorderThickness="0"/>
+        <Button x:Name="btnCalculate" Content="Рассчитать" Margin="449,471,163,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="18" Height="40" Background="#FF007ACC" Foreground="White" BorderThickness="0" Click="btnCalculate_Click"/>
         <Label Content="Современная стоимость (A)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="338,363,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <Label Content="Наращенная стоимость (S)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="338,413,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <TextBox x:Name="tbM" HorizontalAlignment="Left" Height="27" MaxLength="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="40" Margin="589,289,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
@@ -17,7 +17,7 @@
         <TextBox x:Name="tbS" HorizontalAlignment="Left" Height="27" TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Margin="589,417,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
         <TextBox x:Name="tbA" HorizontalAlignment="Left" Height="27" TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Margin="589,367,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="609,342,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Opacity="0.2"/>
-        <TextBox x:Name="tbI" HorizontalAlignment="Left" Height="27" TextWrapping="NoWrap" VerticalAlignment="Top" Width="50" Margin="589,147,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tbI" HorizontalAlignment="Left" Height="27" TextWrapping="NoWrap" VerticalAlignment="Top" Width="40" Margin="589,147,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
         <Label Content="Кратность выплат (p)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="338,238,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <Label Content="Кратность начисления % (m)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="338,285,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <TextBox x:Name="tbR" HorizontalAlignment="Left" Height="27" TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Margin="589,100,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" VerticalContentAlignment="Center"/>
@@ -28,29 +28,19 @@
         <Label Content="Вычисления" HorizontalAlignment="Left" Margin="479,26,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Microsoft JhengHei Light"/>
         <Label Content="Настройки" HorizontalAlignment="Left" Margin="86,26,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Microsoft JhengHei Light"/>
         <StackPanel HorizontalAlignment="Left" Height="74" Margin="30,113,0,0" VerticalAlignment="Top" Width="185">
-            <RadioButton x:Name="rbPre" Margin="0,10" Content="Пренумерандо" Height="21" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
-            <RadioButton x:Name="rbPost" Content="Постнумерандо" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
+            <RadioButton x:Name="rbPost" Margin="0,10" Content="Постнумерандо" Height="21" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
+            <RadioButton x:Name="rbPre" Content="Пренумерандо" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
 
         </StackPanel>
         <Label Content="Аннуитет ренты" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,82,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,71,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,192,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
-        <CheckBox x:Name="cbP" Content="" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
+        <CheckBox x:Name="cbP" Content="" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16" Checked="cbP_Checked" Unchecked="cbP_Unchecked"/>
         <Label Content="p-срочная рента" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,200,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
-        <CheckBox x:Name="cbM" Content="" HorizontalAlignment="Left" Margin="30,257,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16" RenderTransformOrigin="0.5,0.35"/>
+        <CheckBox x:Name="cbM" Content="" HorizontalAlignment="Left" Margin="30,257,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16" RenderTransformOrigin="0.5,0.35" Unchecked="cbM_Unchecked" Checked="cbM_Checked"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,255,0,0" TextWrapping="Wrap" Text="с начислением процентов m раз в году" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,308,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
-        <Label Content="Потом еще сюда что-нибудь запихнем" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-21,419,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-40.76"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
 
 
     </Grid>
