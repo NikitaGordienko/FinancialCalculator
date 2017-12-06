@@ -30,8 +30,7 @@ namespace Financial_Calculator
             tbP.IsEnabled = false;
             tbM.IsEnabled = false;
         }
-
-        
+       
 
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
@@ -45,15 +44,34 @@ namespace Financial_Calculator
             double A = 0;
             double S = 0;
             bool annuity;
-
+            int type = 0;
+            bool infiniteM = false; //by default
 
             if (rbPost.IsChecked == true)
                 annuity = true;
             else
                 annuity = false;
 
+            if (comboboxType.Text == "Обычная")
+            {
+                type = 1;
+                tbP.IsEnabled = true;
+            }
+               
+            else if (comboboxType.Text == "Непрерывная")
+            {
+                type = 2;
+                tbP.IsEnabled = false;
+            }
+            else if (comboboxType.Text == "Вечная")
+            {
+                type = 3;
+                tbP.IsEnabled = false;
+            }
+                
+            
+
             count_1 = 0;
-            //упростить через foreach
             if (!string.IsNullOrWhiteSpace(tbR.Text) & double.TryParse(tbR.Text, out R))
             {
                 R = Double.Parse(tbR.Text);
@@ -84,9 +102,14 @@ namespace Financial_Calculator
                 M = Int32.Parse(tbM.Text);
                 count_1++;
             }
-            else
+            else if (tbM.IsEnabled == false & cbInfinityM.IsChecked == false)
             {
                 M = 1;
+                count_1++;
+            }
+            else if (tbM.IsEnabled == false & cbInfinityM.IsChecked == false)
+            {
+                infiniteM = true;
                 count_1++;
             }
 
@@ -104,48 +127,51 @@ namespace Financial_Calculator
             }
 
 
-            Rent ourRent = new Rent(R, I, N, P, M, A, S, annuity,1);
-            if (count_1 < 4)
-                MessageBox.Show("Введенных параметров не хватает для расчета параметров ренты!");
-            else if (count_1==4)
+            Rent ourRent = new Rent(R, I, N, P, M, A, S, annuity, type, infiniteM);
+            if (type != 0)
             {
-                if (count_2 >= 1)
+                if (count_1 < 4)
+                    MessageBox.Show("Введенных параметров не хватает для расчета параметров ренты!");
+                else if (count_1 == 4)
                 {
-                    if (ourRent.R == 0)
+                    if (count_2 >= 1)
                     {
-                        ourRent.CalculateRentCosts();
-                        ourRent.FindRentPayment();
-                        tbR.Text = ourRent.R.ToString();
+                        if (ourRent.R == 0)
+                        {
+                            ourRent.CalculateRentCosts();
+                            ourRent.FindRentPayment();
+                            tbR.Text = ourRent.R.ToString();
+                        }
+                        else if (ourRent.i == 0)
+                        {
+                            ourRent.CalculateRentCosts();
+                            ourRent.FindInterestRate();
+                            tbI.Text = ourRent.i.ToString();
+                        }
+                        else if (ourRent.n == 0)
+                        {
+                            ourRent.CalculateRentCosts();
+                            ourRent.FindRentDuration();
+                            tbN.Text = ourRent.n.ToString(); //изменить формат на проценты
+                        }
                     }
-                    else if (ourRent.i==0)
+                    else
+                        MessageBox.Show("Введенных данных не хватает для вычисления параметров ренты!");
+                }
+                else if (count_1 == 5)
+                {
+                    if (count_2 == 2)
+                        MessageBox.Show("Все параметры ренты уже известны!");
+                    if (count_2 < 2)
                     {
-                        ourRent.CalculateRentCosts();
-                        ourRent.FindInterestRate();
-                        tbI.Text = ourRent.i.ToString();
-                    }
-                    else if (ourRent.n==0)
-                    {
-                        ourRent.CalculateRentCosts();
-                        ourRent.FindRentDuration();
-                        tbN.Text = ourRent.n.ToString(); // изменить формат на проценты
+                        ourRent.FindCurrentCost();
+                        ourRent.FindAccuredCost();
+                        tbA.Text = ourRent.A.ToString();
+                        tbS.Text = ourRent.S.ToString();
                     }
                 }
-                else
-                    MessageBox.Show("Введенных данных не хватает для вычисления параметров ренты!");
             }
-            else if (count_1==5)
-            {
-                if (count_2 == 2)
-                    MessageBox.Show("Все параметры ренты уже известны!");
-                if (count_2 < 2)
-                {
-                    ourRent.FindCurrentCost();
-                    ourRent.FindAccuredCost();
-                    tbA.Text = ourRent.A.ToString();
-                    tbS.Text = ourRent.S.ToString();
-                }
-            }
-
+            else MessageBox.Show("Выберите тип ренты!");
         }
 
         private void cbP_Checked(object sender, RoutedEventArgs e)
@@ -168,6 +194,14 @@ namespace Financial_Calculator
             tbM.IsEnabled = false;
         }
 
-        
+        private void cbInfinityM_Checked(object sender, RoutedEventArgs e)
+        {
+            tbM.IsEnabled = false;            
+        }
+
+        private void cbInfinityM_Unchecked(object sender, RoutedEventArgs e)
+        {
+            tbM.IsEnabled = true;
+        }
     }
 }

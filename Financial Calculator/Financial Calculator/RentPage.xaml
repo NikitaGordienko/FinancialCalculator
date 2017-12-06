@@ -1,9 +1,10 @@
-﻿<Window x:Class="Financial_Calculator.RentPage"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Financial_Calculator"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Financial_Calculator.RentPage"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Рассчет рент" Height="600" Width="800" Loaded="Window_Loaded">
@@ -39,8 +40,17 @@
         <Label Content="p-срочная рента" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,200,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
         <CheckBox x:Name="cbM" Content="" HorizontalAlignment="Left" Margin="30,257,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16" RenderTransformOrigin="0.5,0.35" Unchecked="cbM_Unchecked" Checked="cbM_Checked"/>
-        <TextBlock HorizontalAlignment="Left" Margin="55,255,0,0" TextWrapping="Wrap" Text="с начислением процентов m раз в году" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="55,255,0,0" TextWrapping="Wrap" Text="с начислением процентов m раз в году, m≠∞" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,308,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,323,0,0" TextWrapping="Wrap" Text="Тип ренты" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
+        <ComboBox x:Name="comboboxType" HorizontalAlignment="Left" Margin="116,321,0,0" VerticalAlignment="Top" Width="145" FontFamily="Microsoft JhengHei Light" FontSize="16">
+            <System:String>Обычная</System:String>
+            <System:String>Непрерывная</System:String>
+            <System:String>Вечная</System:String>
+        </ComboBox>
+        <CheckBox x:Name="cbInfinityM" Content="" HorizontalAlignment="Left" Margin="659,294,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei Light" FontSize="16" Checked="cbInfinityM_Checked" Unchecked="cbInfinityM_Unchecked"/>
+        <Label Content="∞" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="639,285,0,0" FontSize="16" FontFamily="Microsoft JhengHei Light"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,360,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
 
 
     </Grid>
