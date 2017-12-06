@@ -31,6 +31,7 @@ namespace Financial_Calculator
             this.type = type;
         }
 
+        // Переработать с учетом типа ренты
         public void CalculateRentCosts() 
         {
             if (S != 0 & A == 0)
@@ -65,6 +66,9 @@ namespace Financial_Calculator
                     S = double.PositiveInfinity;
                 else
                     S = double.PositiveInfinity;
+            if (type == 3)
+                S = R * (Math.Pow(1 + i / m, m * n) - 1) / (m * Math.Log(1 + i / m));
+
         }
 
         public void FindCurrentCost()
@@ -79,6 +83,8 @@ namespace Financial_Calculator
                     A = R / (Math.Pow(1 + i / m, m) - 1);
                 else
                     A = (R * Math.Pow(1 + i / m, m)) / (Math.Pow(1 + i / m, m) - 1);
+            if (type == 3)
+                A = R * (1 - Math.Pow(1 + i / m, -m * n)) / (m * Math.Log(1 + i / m));
         }
 
         public void FindRentPayment()
@@ -101,12 +107,12 @@ namespace Financial_Calculator
                 }
             }
             if (type == 2)
-            {
                 if (flag == true)
                     R = A * (Math.Pow(1 + i / m, m) - 1);
                 else
                     R = (A * (Math.Pow(1 + i / m, m) - 1)) / Math.Pow(1 + i / m, m);
-            }
+            if (type == 3)
+                R = S * m * Math.Log(1 + i / m) / (Math.Pow(1 + i / m, m * n) - 1);
         }
 
         public void FindRentDuration()
@@ -131,6 +137,10 @@ namespace Financial_Calculator
             if (type == 2)
             {
                 n = double.PositiveInfinity;
+            }
+            if (type == 3)
+            {
+                n = Math.Log((S * m * Math.Log(1 + i / m) / R) + 1) / (m * Math.Log(1 + i));
             }       
         }
 
