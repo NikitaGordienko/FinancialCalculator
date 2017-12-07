@@ -43,7 +43,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="55,255,0,0" TextWrapping="Wrap" Text="с начислением процентов m раз в году, m≠∞" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="10,308,0,0" Stroke="Black" VerticalAlignment="Top" Width="251" Opacity="0.2"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,323,0,0" TextWrapping="Wrap" Text="Тип ренты" VerticalAlignment="Top" Width="206" FontFamily="Microsoft JhengHei Light" FontSize="16"/>
-        <ComboBox x:Name="comboboxType" HorizontalAlignment="Left" Margin="116,321,0,0" VerticalAlignment="Top" Width="145" FontFamily="Microsoft JhengHei Light" FontSize="16">
+        <ComboBox x:Name="comboboxType" HorizontalAlignment="Left" Margin="116,321,0,0" VerticalAlignment="Top" Width="145" FontFamily="Microsoft JhengHei Light" FontSize="16" LostFocus="comboboxType_LostFocus">
             <System:String>Обычная</System:String>
             <System:String>Непрерывная</System:String>
             <System:String>Вечная</System:String>

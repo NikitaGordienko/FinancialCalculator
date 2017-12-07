@@ -29,9 +29,10 @@ namespace Financial_Calculator
             rbPost.IsChecked = true;
             tbP.IsEnabled = false;
             tbM.IsEnabled = false;
+
         }
        
-
+        
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
             int count_1;
@@ -52,6 +53,7 @@ namespace Financial_Calculator
             else
                 annuity = false;
 
+            
             if (comboboxType.Text == "Обычная")
             {
                 type = 1;
@@ -62,11 +64,13 @@ namespace Financial_Calculator
             {
                 type = 2;
                 tbP.IsEnabled = false;
+                cbP.IsChecked = false;
             }
             else if (comboboxType.Text == "Вечная")
             {
                 type = 3;
                 tbP.IsEnabled = false;
+                cbP.IsChecked = false;
             }
                 
             
@@ -110,6 +114,7 @@ namespace Financial_Calculator
             else if (tbM.IsEnabled == false & cbInfinityM.IsChecked == false)
             {
                 infiniteM = true;
+                //M = 0;
                 count_1++;
             }
 
@@ -196,12 +201,23 @@ namespace Financial_Calculator
 
         private void cbInfinityM_Checked(object sender, RoutedEventArgs e)
         {
-            tbM.IsEnabled = false;            
+            tbM.IsEnabled = false;
+            cbM.IsChecked = false;
         }
 
         private void cbInfinityM_Unchecked(object sender, RoutedEventArgs e)
         {
             tbM.IsEnabled = true;
+        }
+
+        private void comboboxType_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (comboboxType.SelectedIndex == 1 || comboboxType.SelectedIndex == 2)
+            {
+                cbP.IsEnabled = false;
+                cbP.IsChecked = false;
+            }
+            else cbP.IsEnabled = true;
         }
     }
 }
