@@ -34,7 +34,7 @@ namespace Financial_Calculator
         }
 
         // Переработать с учетом типа ренты
-        public void CalculateRentCosts() 
+        public void CalculateRentCosts()
         {
             if (S != 0 & A == 0)
             {
@@ -50,6 +50,28 @@ namespace Financial_Calculator
             }
 
         }
+
+        public void CalculateRentCosts2()
+        {
+            if (type == 1)
+                if (flag == true)
+                {
+                    if (mType == true)
+                        S = A * Math.Exp(n * i); // проверить
+                    else
+                        S = A * Math.Pow(1 + i / m, m * n);
+                }
+                else
+                {
+                    if (mType == true)
+                        S = A * Math.Exp(n * i);
+                    else
+                        S = A * Math.Pow(1 + i / m, m / p);
+                }
+
+        }
+
+     
 
         public void FindAccuredCost()
         {
@@ -93,14 +115,14 @@ namespace Financial_Calculator
                 if (flag == true) //Постнумерандо
                 {
                     if (mType == true)
-                        A = R / p * (1 - Math.Exp(n * i)) / (Math.Exp(1 / p) - 1);
+                        A = R / p * (1 - Math.Exp(-n * i)) / (Math.Exp(1 / p) - 1);
                     else
                         A = R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1));
                 }                 
                 else //Пренумерандо
                 {
                     if (mType == true)
-                        A = R / p * (1 - Math.Exp(n * i)) / (Math.Exp(1 / p) - 1) * Math.Exp(i / p);
+                        A = R / p * (1 - Math.Exp(-n * i)) / (Math.Exp(1 / p) - 1) * Math.Exp(i / p);
                     else
                         A = (R / p * ((1 - Math.Pow(1 + i / m, -m * n)) / (Math.Pow(1 + i / m, m / p) - 1))) * Math.Pow(1 + i / m, m / p);
                 }                   
@@ -127,17 +149,37 @@ namespace Financial_Calculator
             {   // Хочу сделать это только с помощью S (Следовательно нужно переработать CalculateRentCosts())
                 if (flag == true)
                 {
-                    if (S == 0)
-                        R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                    if (mType == true)
+                    {
+                        if (S == 0)
+                            R = (A * p * (Math.Exp(1 / p) - 1)) / (1 - Math.Exp(-n * i));
+                        else
+                            R = (S * p * (Math.Exp(1 / p) - 1)) / (Math.Exp(n * i) - 1);
+                    }
                     else
-                        R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / (1 - Math.Pow(1 + i / m, -m * n));
+                    {
+                        if (S == 0)
+                            R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                        else
+                            R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / (1 - Math.Pow(1 + i / m, -m * n));
+                    }
                 }
                 else
                 {
-                    if (S == 0)
-                        R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                    if (mType == true)
+                    {
+                        if (S == 0)
+                            R = (A * p * (Math.Exp(1 / p) - 1)) / ((1 - Math.Exp(-n * i)) * Math.Exp(i/p));
+                        else
+                            R = (S * p * (Math.Exp(1 / p) - 1)) / ((Math.Exp(n * i) - 1) * Math.Exp(i/p));
+                    }
                     else
-                        R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / ((Math.Pow(1 + i / m, m * n) - 1) * Math.Pow(1 + i / m, m / p));
+                    {
+                        if (S == 0)
+                            R = (A * p * (Math.Pow(1 + i / m, m / p) - 1)) / (Math.Pow(1 + i / m, m * n) - 1);
+                        else
+                            R = (S * p * (Math.Pow(1 + i / m, m / p) - 1)) / ((Math.Pow(1 + i / m, m * n) - 1) * Math.Pow(1 + i / m, m / p));
+                    }
                 }
             }
             if (type == 2)
