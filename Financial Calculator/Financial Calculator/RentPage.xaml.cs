@@ -30,8 +30,7 @@ namespace Financial_Calculator
             tbP.IsEnabled = false;
             tbM.IsEnabled = false;
 
-        }
-       
+        }    
         
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +56,7 @@ namespace Financial_Calculator
             if (comboboxType.Text == "Обычная")
             {
                 type = 1;
-                tbP.IsEnabled = true;
+                //tbP.IsEnabled = true;
             }
                
             else if (comboboxType.Text == "Непрерывная")
@@ -71,8 +70,7 @@ namespace Financial_Calculator
                 type = 3;
                 tbP.IsEnabled = false;
                 cbP.IsChecked = false;
-            }
-                
+            }      
             
 
             count_1 = 0;
